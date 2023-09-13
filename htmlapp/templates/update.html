@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="row">
+        <div class=" shadow-lg p-2 mx-auto col-10 col-md-8 col-lg-6">
+            <h1>Add Recipe Here</h1>
+            <!-- {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+
+    <div class="alert alert-primary" role="alert">
+      {{ message }}
+    </div>
+  
+    {% endfor %}
+</ul>
+{% endif %} -->
+    <form method="POST"  enctype="multipart/form-data"> 
+      {% csrf_token %}
+ 
+        <div class="mb-3">
+          <input value="{{ recipes.title }}"  type="text" class="form-control" name="title" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"></label>
+            <textarea  name="description" id="" cols="105" rows="10">{{ recipes.description }}</textarea>
+            <!-- <input type="text" class="form-control"  name="description" id="exampleInputEmail1" aria-describedby="emailHelp"> -->
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="customFile">Photo</label>
+            <input type="file" name="photo" class="form-control" id="customFile" />
+          </div>
+        <!-- <p>Already have account??<a  href="/login/"> Login</a></p> -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+      <p>List of Recipies: <a href="/recipe/"> Here </a></p>
+    </div>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
+</html>
+

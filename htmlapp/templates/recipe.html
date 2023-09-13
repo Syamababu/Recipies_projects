@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="row">
+        <div class=" shadow-lg p-2 mx-auto col-10 col-md-8 col-lg-6">
+            <h1 style="text-align:center">List Of Recipe</h1>
+            <!-- {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+
+    <div class="alert alert-primary" role="alert">
+      {{ message }}
+    </div>
+  
+    {% endfor %}
+</ul>
+{% endif %} -->
+<table class="table">
+    <form>
+        <input style="margin-left: 455px;
+        width: 299px;"  placeholder="search recipes"   name="serach" type="text" class="form-control"  id="exampleInputEmail1" aria-describedby="emailHelp">
+        <button style="margin-left: 680px;" type="submit" class="btn btn-primary">Search</button>
+      </div>
+    </form>
+    <thead>
+      <tr>
+        <th scope="col">Sl No</th>
+        <th scope="col">Title</th>
+        <th scope="col">Descriptiions</th>
+        <th scope="col">Photo</th>
+        <th scope="col">Operations</th>
+
+      </tr>
+    </thead>
+    <tbody>
+        {% for item in recipes %}
+        
+        <tr> 
+            <td>{{ forloop.counter }}</td>
+             <td>{{ item.title }}</td>
+             <td>{{ item.description }}</td>
+             <td>
+                <img src="/media/{{ item.photo }}" style="height: 100px;" > </td>
+             <td><a href="{% url 'updaterecipe' item.id %}"><button type="button" class="btn btn-sm  btn-primary">Update</button></a> <br><br>
+            <a href="{% url 'recipedelete' item.id %}"><button type="button" class="btn btn-sm  btn-danger">Delete</button></a></td>
+
+        </tr>
+           {% endfor %}
+
+    </tbody>
+  </table>
+  {% if recipes.has_other_pages %}
+  <nav aria-label="Page navigation example">
+
+  <ul style="padding-left: 501px;" class="pagination">
+    {% if recipes.has_previous %}
+      <li><a class="page-link" href="?page={{ recipes.previous_page_number }}">Previous</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in recipes.paginator.page_range %}
+      {% if recipes.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
+      {% else %}
+        <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if recipes.has_next %}
+      <li ><a class="page-link" href="?page={{ recipes.next_page_number }}">Next</a></li>
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+</nav>
+
+{% endif %}
+
+
+
+
+   <p>Add Recipe here:  <a href="/add/">ADD-RECIPES</a></p>
+    </div>
+  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
+</html>
